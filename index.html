@@ -1,100 +1,21 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>インターハイ順位予測器</title>
-
-<style>
-body{
-    font-family:sans-serif;
-    max-width:600px;
-    margin:auto;
-    padding:20px;
-}
-
-h1{
-    text-align:center;
-}
-
-input,button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    font-size:18px;
-}
-
-.result{
-    margin-top:20px;
-    padding:15px;
-    border:1px solid #ccc;
-    border-radius:10px;
-}
-</style>
-
-</head>
-<body>
-
-<h1>インターハイ順位予測器</h1>
-
-<p>男子400mHタイムを入力</p>
-
-<select id="event">
-
-<option>男子400mH</option>
-
-<option>男子400m</option>
-
-<option>男子1500m</option>
-
-</select>
-
-<input
-id="time"
-type="number"
-step="0.01"
-placeholder="例：51.20">
-
-<button onclick="predict()">
-順位予想
-</button>
-
-<div class="result" id="result">
-タイムを入力してください
-</div>
-
 <script>
-
 let data = null;
 
 fetch('./data.json')
   .then(res => res.json())
   .then(json => {
     data = json;
-
-    // ここで初期処理を動かす
-    init();
   });
-
-function init() {
-  console.log("データ読み込み完了", data);
-
-  // ここに今までの計算処理を書く
-}
 
 function predict(){
 
 const time =
-parseFloat(
-document.getElementById("time").value
-);
+parseFloat(document.getElementById("time").value);
 
 if(isNaN(time)){
     alert("タイムを入力してください");
     return;
 }
-
-let totalRank = 0;
 
 const event =
 document.getElementById("event").value;
@@ -102,12 +23,13 @@ document.getElementById("event").value;
 const eventData =
 data[event];
 
+let totalRank = 0;
+
 for(const yearData of eventData){
 
     let rank = yearData.places.length + 1;
 
     for(let i=0;i<yearData.places.length;i++){
-
         if(time <= yearData.places[i]){
             rank = i + 1;
             break;
@@ -118,8 +40,7 @@ for(const yearData of eventData){
 }
 
 const avgRank =
-(totalRank / eventData.length)
-.toFixed(1);
+(totalRank / eventData.length).toFixed(1);
 
 let message="";
 
@@ -142,8 +63,7 @@ const nyushoLines = {
 const nyushoLine = nyushoLines[event];
 
 const diff =
-(time - nyushoLine)
-.toFixed(2);
+(time - nyushoLine).toFixed(2);
 
 let challengeText="";
 
@@ -165,80 +85,4 @@ document.getElementById("result").innerHTML = `
 `;
 
 }
-
-<script>
-let data = null;
-
-function getRank(time, yearData) {
-  for (let i = 0; i < yearData.length; i++) {
-    if (time <= yearData[i]) {
-      return i + 1;
-    }
-  }
-  return yearData.length + 1;
-}
-
-function simulateAllYears(time) {
-  const years = data["男子400mH"];
-  let results = [];
-
-  for (const year in years) {
-    const rank = getRank(time, years[year]);
-    results.push({ year, rank });
-  }
-
-  return results;
-}
-
-function getAverageRank(results) {
-  let sum = 0;
-  for (const r of results) sum += r.rank;
-  return sum / results.length;
-}
-
-function getTop8Rate(results) {
-  let count = 0;
-  for (const r of results) if (r.rank <= 8) count++;
-  return (count / results.length) * 100;
-}
-
-function getFinalRate(results) {
-  let count = 0;
-  for (const r of results) if (r.rank <= 8) count++;
-  return (count / results.length) * 100;
-}
-
-function calculate(time) {
-  const results = simulateAllYears(time);
-
-  return {
-    avgRank: getAverageRank(results),
-    top8: getTop8Rate(results),
-    finalRate: getFinalRate(results),
-    results
-  };
-}
-
-function init() {
-  const result = calculate(51.20);
-
-  console.log("予想順位:", result.avgRank.toFixed(1));
-  console.log("入賞率:", result.top8 + "%");
-  console.log("決勝率:", result.finalRate + "%");
-
-  for (const r of result.results) {
-    console.log(`${r.year} → ${r.rank}位`);
-  }
-}
-
-fetch('./data.json')
-  .then(res => res.json())
-  .then(json => {
-    data = json;
-    init();
-  });
-
 </script>
-
-</body>
-</html>
