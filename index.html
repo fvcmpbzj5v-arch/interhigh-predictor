@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>インターハイ順位予想</title>
+</head>
+
+<body>
+
+<h1>インターハイ順位予想</h1>
+
+<input id="time" placeholder="タイム入力">
+
+<button onclick="predict()">
+予想する
+</button>
+
+<p id="result"></p>
+
+<script>
+function predict(){
+
+const time =
+parseFloat(
+document.getElementById("time").value
+);
+
+let result="";
+
+if(time<=50){
+result="優勝候補";
+}
+else if(time<=51){
+result="3位以内";
+}
+else if(time<=52){
+result="入賞圏";
+}
+else{
+result="予選レベル";
+}
+
+document.getElementById("result").innerText=result;
+}
+</script>
+
+</body>
+</html>
