@@ -1,23 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>インターハイ順位予想</title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>インターハイ順位予測器</title>
 
+<style>
+body{
+    font-family:sans-serif;
+    max-width:600px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+input,button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    font-size:18px;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+</style>
+
+</head>
 <body>
 
-<h1>インターハイ順位予想</h1>
+<h1>インターハイ順位予測器</h1>
 
-<input id="time" placeholder="タイム入力">
+<p>男子400mHタイムを入力</p>
+
+<input
+id="time"
+type="number"
+step="0.01"
+placeholder="例：51.20">
 
 <button onclick="predict()">
-予想する
+順位予想
 </button>
 
-<p id="result"></p>
+<div class="result" id="result">
+タイムを入力してください
+</div>
 
 <script>
+
+const data = [
+{
+year:2025,
+places:[49.84,49.98,50.48,50.57,50.68]
+},
+{
+year:2024,
+places:[50.20,50.55,50.70,50.90,51.10]
+},
+{
+year:2023,
+places:[50.14,50.64,50.74,51.93,51.94]
+}
+];
+
 function predict(){
 
 const time =
@@ -25,23 +77,53 @@ parseFloat(
 document.getElementById("time").value
 );
 
-let result="";
+if(isNaN(time)){
+    alert("タイムを入力してください");
+    return;
+}
 
-if(time<=50){
-result="優勝候補";
+let totalRank = 0;
+
+for(const yearData of data){
+
+    let rank = yearData.places.length + 1;
+
+    for(let i=0;i<yearData.places.length;i++){
+
+        if(time <= yearData.places[i]){
+            rank = i + 1;
+            break;
+        }
+    }
+
+    totalRank += rank;
 }
-else if(time<=51){
-result="3位以内";
+
+const avgRank =
+(totalRank / data.length)
+.toFixed(1);
+
+let message="";
+
+if(avgRank <= 3){
+    message="表彰台クラス";
 }
-else if(time<=52){
-result="入賞圏";
+else if(avgRank <= 5){
+    message="入賞クラス";
 }
 else{
-result="予選レベル";
+    message="決勝進出クラス";
 }
 
-document.getElementById("result").innerText=result;
+document.getElementById("result").innerHTML = `
+<h2>予想結果</h2>
+<p>入力タイム：${time.toFixed(2)} 秒</p>
+<p>平均予想順位：${avgRank} 位</p>
+<p>${message}</p>
+`;
+
 }
+
 </script>
 
 </body>
