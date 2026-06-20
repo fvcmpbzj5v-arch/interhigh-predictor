@@ -39,6 +39,16 @@ input,button{
 
 <p>男子400mHタイムを入力</p>
 
+<select id="event">
+
+<option>男子400mH</option>
+
+<option>男子400m</option>
+
+<option>男子1500m</option>
+
+</select>
+
 <input
 id="time"
 type="number"
@@ -55,21 +65,25 @@ placeholder="例：51.20">
 
 <script>
 
-const data = [
-{
-year:2025,
-places:[49.84,49.98,50.48,50.57,50.68]
-},
-{
-year:2024,
-places:[50.20,50.55,50.70,50.90,51.10]
-},
-{
-year:2023,
-places:[50.14,50.64,50.74,51.93,51.94]
-}
-];
+const data = {
 
+"男子400mH":[
+{year:2025,places:[49.84,49.98,50.48,50.57,50.68]},
+{year:2024,places:[50.20,50.55,50.70,50.90,51.10]},
+{year:2023,places:[50.14,50.64,50.74,51.93,51.94]}
+],
+
+"男子400m":[
+{year:2025,places:[46.0,46.2,46.5,46.8,47.0]},
+{year:2024,places:[46.1,46.4,46.7,47.0,47.2]}
+],
+
+"男子1500m":[
+{year:2025,places:[225,226,227,228,229]},
+{year:2024,places:[224,226,227,229,230]}
+]
+
+};
 function predict(){
 
 const time =
@@ -84,7 +98,13 @@ if(isNaN(time)){
 
 let totalRank = 0;
 
-for(const yearData of data){
+const event =
+document.getElementById("event").value;
+
+const eventData =
+data[event];
+
+for(const yearData of eventData){
 
     let rank = yearData.places.length + 1;
 
