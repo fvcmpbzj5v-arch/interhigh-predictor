@@ -166,6 +166,78 @@ document.getElementById("result").innerHTML = `
 
 }
 
+<script>
+let data = null;
+
+function getRank(time, yearData) {
+  for (let i = 0; i < yearData.length; i++) {
+    if (time <= yearData[i]) {
+      return i + 1;
+    }
+  }
+  return yearData.length + 1;
+}
+
+function simulateAllYears(time) {
+  const years = data["男子400mH"];
+  let results = [];
+
+  for (const year in years) {
+    const rank = getRank(time, years[year]);
+    results.push({ year, rank });
+  }
+
+  return results;
+}
+
+function getAverageRank(results) {
+  let sum = 0;
+  for (const r of results) sum += r.rank;
+  return sum / results.length;
+}
+
+function getTop8Rate(results) {
+  let count = 0;
+  for (const r of results) if (r.rank <= 8) count++;
+  return (count / results.length) * 100;
+}
+
+function getFinalRate(results) {
+  let count = 0;
+  for (const r of results) if (r.rank <= 8) count++;
+  return (count / results.length) * 100;
+}
+
+function calculate(time) {
+  const results = simulateAllYears(time);
+
+  return {
+    avgRank: getAverageRank(results),
+    top8: getTop8Rate(results),
+    finalRate: getFinalRate(results),
+    results
+  };
+}
+
+function init() {
+  const result = calculate(51.20);
+
+  console.log("予想順位:", result.avgRank.toFixed(1));
+  console.log("入賞率:", result.top8 + "%");
+  console.log("決勝率:", result.finalRate + "%");
+
+  for (const r of result.results) {
+    console.log(`${r.year} → ${r.rank}位`);
+  }
+}
+
+fetch('./data.json')
+  .then(res => res.json())
+  .then(json => {
+    data = json;
+    init();
+  });
+
 </script>
 
 </body>
