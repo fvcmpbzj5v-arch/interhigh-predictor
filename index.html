@@ -115,6 +115,23 @@ else{
     message="決勝進出クラス";
 }
 
+const nyushoLine = 50.68;
+
+const diff =
+(time - nyushoLine)
+.toFixed(2);
+
+let challengeText="";
+
+if(time <= nyushoLine){
+    challengeText =
+    `入賞ラインを ${Math.abs(diff)} 秒上回っています`;
+}
+else{
+    challengeText =
+    `入賞ラインまであと ${diff} 秒`;
+}
+
 document.getElementById("result").innerHTML = `
 <h2>予想結果</h2>
 <p>入力タイム：${time.toFixed(2)} 秒</p>
