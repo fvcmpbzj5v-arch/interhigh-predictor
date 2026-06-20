@@ -120,7 +120,7 @@ for(const yearData of eventData){
 }
 
 const avgRank =
-(totalRank / data.length)
+(totalRank / eventData.length)
 .toFixed(1);
 
 let message="";
@@ -135,7 +135,13 @@ else{
     message="決勝進出クラス";
 }
 
-const nyushoLine = 50.68;
+const nyushoLines = {
+  "男子400mH":50.68,
+  "男子400m":47.00,
+  "男子1500m":229
+};
+
+const nyushoLine = nyushoLines[event];
 
 const diff =
 (time - nyushoLine)
