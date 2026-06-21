@@ -165,21 +165,52 @@ const nyushoLines = {
   "男子1500m":229
 };
 
+const podiumLines = {
+  "男子400mH":50.48,
+  "男子400m":46.50,
+  "男子1500m":225
+};
+
+const winLines = {
+  "男子400mH":49.84,
+  "男子400m":46.00,
+  "男子1500m":223
+};
+
 const nyushoLine = nyushoLines[event];
+
+const podiumLine = podiumLines[event];
+const winLine = winLines[event];
+
+const podiumDiff =
+(time - podiumLine).toFixed(2);
+
+const winDiff =
+(time - winLine).toFixed(2);
 
 const diff =
 (time - nyushoLine)
 .toFixed(2);
 
-let challengeText="";
+let podiumText = "";
+let winText = "";
 
-if(time <= nyushoLine){
-    challengeText =
-    `入賞ラインを ${Math.abs(diff)} 秒上回っています`;
+if(time <= podiumLine){
+    podiumText =
+    `表彰台ラインを ${Math.abs(podiumDiff)} 秒上回っています`;
 }
 else{
-    challengeText =
-    `入賞ラインまであと ${diff} 秒`;
+    podiumText =
+    `表彰台まであと ${podiumDiff} 秒`;
+}
+
+if(time <= winLine){
+    winText =
+    `優勝ラインを ${Math.abs(winDiff)} 秒上回っています`;
+}
+else{
+    winText =
+    `優勝まであと ${winDiff} 秒`;
 }
 
 document.getElementById("result").innerHTML = `
@@ -196,6 +227,8 @@ ${yearResults}
 <p>決勝進出率：${finalRate}%</p>
 <p>${message}</p>
 <p>${challengeText}</p>
+<p>${podiumText}</p>
+<p>${winText}</p>
 `;
 
 }
