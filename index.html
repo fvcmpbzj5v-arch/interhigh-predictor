@@ -134,11 +134,11 @@ hr{
 }
 
 .progress-label{
-
     font-size:14px;
-
     margin-bottom:4px;
-
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
 }
 
 .progress{
@@ -452,8 +452,8 @@ ${challengeText}
 
 <div class="progress-box">
     <div class="progress-label">
-        🎯 入賞ライン到達度
-    </div>
+    🎯 入賞ライン到達度 ${Math.round(nyushoPercent)}%
+</div>
 
  <div class="progress">
 
@@ -469,9 +469,9 @@ ${challengeText}
 </div>
 
 <div class="progress-box">
-    <div class="progress-label">
-        🥉 表彰台到達度
-    </div>
+   <div class="progress-label">
+    🥉 表彰台到達度 ${Math.round(podiumPercent)}%
+</div>
 
    <div class="progress">
 
@@ -489,8 +489,8 @@ ${challengeText}
 
 <div class="progress-box">
     <div class="progress-label">
-        🥇 優勝到達度
-    </div>
+    🥇 優勝到達度 ${Math.round(winPercent)}%
+</div>
 
     <div class="progress">
 
