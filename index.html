@@ -319,6 +319,15 @@ const diff =
 (time - nyushoLine)
 .toFixed(2);
 
+const nyushoPercent =
+Math.max(
+    0,
+    Math.min(
+        100,
+        100 - ((time - nyushoLine) * 100)
+    )
+);
+
 let challengeText = "";
 
 let challengeClass = "";
@@ -398,6 +407,19 @@ ${challengeText}
 </p>
 <p>${podiumText}</p>
 <p>${winText}</p>
+
+<div class="progress-box">
+    <div class="progress-label">
+        入賞ライン到達度
+    </div>
+
+    <div class="progress">
+        <div
+            class="progress-fill"
+            style="width:${nyushoPercent}%"
+        ></div>
+    </div>
+</div>
 `;
 
 }
