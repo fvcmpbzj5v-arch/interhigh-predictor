@@ -96,6 +96,8 @@ if(isNaN(time)){
 
 let totalRank = 0;
 
+let yearResults = "";
+
 const event =
 document.getElementById("event").value;
 
@@ -114,6 +116,10 @@ for(const yearData of eventData){
     }
 
     totalRank += rank;
+
+yearResults += `
+<p>${yearData.year}年 → ${rank}位相当</p>
+`;
 
 }
 
@@ -158,10 +164,17 @@ else{
 
 document.getElementById("result").innerHTML = `
 <h2>予想結果</h2>
+
 <p>入力タイム：${time.toFixed(2)} 秒</p>
+
+${yearResults}
+
+<hr>
+
 <p>平均予想順位：${avgRank} 位</p>
 <p>${message}</p>
-<p>${challengeText}</p>`;
+<p>${challengeText}</p>
+`;
 
 }
 
