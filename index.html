@@ -95,8 +95,10 @@ if(isNaN(time)){
 }
 
 let totalRank = 0;
-
 let yearResults = "";
+
+let nyushoCount = 0;
+let finalCount = 0;
 
 const event =
 document.getElementById("event").value;
@@ -117,6 +119,14 @@ for(const yearData of eventData){
 
     totalRank += rank;
 
+if(rank <= 8){
+    finalCount++;
+}
+
+if(rank <= 5){
+    nyushoCount++;
+}
+
 yearResults += `
 <p>${yearData.year}年 → ${rank}位相当</p>
 `;
@@ -126,6 +136,16 @@ yearResults += `
 const avgRank =
 (totalRank / eventData.length)
 .toFixed(1);
+
+const nyushoRate =
+Math.round(
+(nyushoCount / eventData.length) * 100
+);
+
+const finalRate =
+Math.round(
+(finalCount / eventData.length) * 100
+);
 
 let message="";
 
@@ -172,6 +192,8 @@ ${yearResults}
 <hr>
 
 <p>平均予想順位：${avgRank} 位</p>
+<p>入賞率：${nyushoRate}%</p>
+<p>決勝進出率：${finalRate}%</p>
 <p>${message}</p>
 <p>${challengeText}</p>
 `;
