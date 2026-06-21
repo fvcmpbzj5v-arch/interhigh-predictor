@@ -142,17 +142,39 @@ hr{
 }
 
 .progress{
-
     width:100%;
-
     height:20px;
-
     background:#e5e7eb;
-
     border-radius:10px;
-
     overflow:hidden;
+    position:relative;
+}
 
+.marker50{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:2px;
+    height:100%;
+    background:#6b7280;
+}
+
+.marker75{
+    position:absolute;
+    left:75%;
+    top:0;
+    width:2px;
+    height:100%;
+    background:#374151;
+}
+
+.marker100{
+    position:absolute;
+    right:0;
+    top:0;
+    width:2px;
+    height:100%;
+    background:#111827;
 }
 
 .progress-fill{
@@ -432,12 +454,17 @@ ${challengeText}
         🎯 入賞ライン到達度
     </div>
 
-    <div class="progress">
-        <div
-            class="progress-fill"
-            style="width:${nyushoPercent}%"
-        ></div>
-    </div>
+ <div class="progress">
+
+    <div class="marker50"></div>
+    <div class="marker75"></div>
+    <div class="marker100"></div>
+
+    <div
+        class="progress-fill"
+        style="width:${nyushoPercent}%"
+    ></div>
+
 </div>
 
 <div class="progress-box">
