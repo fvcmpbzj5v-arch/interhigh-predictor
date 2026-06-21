@@ -107,7 +107,6 @@ for(const yearData of eventData){
     let rank = yearData.places.length + 1;
 
     for(let i=0;i<yearData.places.length;i++){
-
         if(time <= yearData.places[i]){
             rank = i + 1;
             break;
@@ -115,6 +114,9 @@ for(const yearData of eventData){
     }
 
     totalRank += rank;
+
+    // ★これを追加
+    yearText += `${yearData.year} → ${rank}位<br>`;
 }
 
 const avgRank =
@@ -162,6 +164,11 @@ document.getElementById("result").innerHTML = `
 <p>平均予想順位：${avgRank} 位</p>
 <p>${message}</p>
 <p>${challengeText}</p>
+
+<hr>
+
+<h3>過去年別結果</h3>
+<p>${yearText}</p>
 `;
 
 }
