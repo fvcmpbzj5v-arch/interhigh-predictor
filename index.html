@@ -62,6 +62,21 @@ hr{
     margin:15px 0;
 }
 
+.big-rank{
+    text-align:center;
+    margin:20px 0;
+}
+
+.big-rank-value{
+    font-size:60px;
+    font-weight:bold;
+}
+
+.big-rank-label{
+    font-size:18px;
+    color:#666;
+}
+
 .stat-card{
     background:white;
     border-radius:15px;
@@ -189,6 +204,18 @@ const avgRank =
 (totalRank / eventData.length)
 .toFixed(1);
 
+let rankColor = "#ef4444";
+
+if(avgRank <= 3){
+    rankColor = "#f59e0b";
+}
+else if(avgRank <= 5){
+    rankColor = "#22c55e";
+}
+else if(avgRank <= 8){
+    rankColor = "#2563eb";
+}
+
 const nyushoRate =
 Math.round(
 (nyushoCount / eventData.length) * 100
@@ -267,9 +294,17 @@ ${yearResults}
 
 <hr>
 
-<div class="stat-card">
-    <div class="stat-title">🏅 平均順位</div>
-    <div class="stat-value">${avgRank}位</div>
+<div class="big-rank">
+    <div class="big-rank-label">
+        総合評価
+    </div>
+
+    <div
+        class="big-rank-value"
+        style="color:${rankColor};"
+    >
+        ${avgRank}位
+    </div>
 </div>
 
 <div class="stat-card">
@@ -281,6 +316,7 @@ ${yearResults}
     <div class="stat-title">🎯 決勝進出率</div>
     <div class="stat-value">${finalRate}%</div>
 </div>
+
 <p>${message}</p>
 <p>${challengeText}</p>
 <p>${podiumText}</p>
