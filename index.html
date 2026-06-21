@@ -61,6 +61,27 @@ button:hover{
 hr{
     margin:15px 0;
 }
+
+.stat-card{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    margin-top:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-title{
+    font-size:14px;
+    color:#666;
+}
+
+.stat-value{
+    font-size:32px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
 </style>
 
 </head>
@@ -246,9 +267,20 @@ ${yearResults}
 
 <hr>
 
-<p>平均予想順位：${avgRank} 位</p>
-<p>入賞率：${nyushoRate}%</p>
-<p>決勝進出率：${finalRate}%</p>
+<div class="stat-card">
+    <div class="stat-title">🏅 平均順位</div>
+    <div class="stat-value">${avgRank}位</div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">🔥 入賞率</div>
+    <div class="stat-value">${nyushoRate}%</div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">🎯 決勝進出率</div>
+    <div class="stat-value">${finalRate}%</div>
+</div>
 <p>${message}</p>
 <p>${challengeText}</p>
 <p>${podiumText}</p>
