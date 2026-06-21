@@ -255,13 +255,22 @@ const diff =
 
 let challengeText = "";
 
+let challengeClass = "";
+
 if(time <= nyushoLine){
     challengeText =
     `入賞ラインを ${Math.abs(diff)} 秒上回っています`;
+    challengeClass = "good";
+}
+else if(diff <= 0.5){
+    challengeText =
+    `入賞ラインまであと ${diff} 秒`;
+    challengeClass = "near";
 }
 else{
     challengeText =
     `入賞ラインまであと ${diff} 秒`;
+    challengeClass = "far";
 }
 
 let podiumText = "";
@@ -318,7 +327,9 @@ ${yearResults}
 </div>
 
 <p>${message}</p>
-<p>${challengeText}</p>
+<p class="${challengeClass}">
+${challengeText}
+</p>
 <p>${podiumText}</p>
 <p>${winText}</p>
 `;
