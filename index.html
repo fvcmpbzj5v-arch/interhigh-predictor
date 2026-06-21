@@ -156,25 +156,26 @@ hr{
     top:0;
     width:2px;
     height:100%;
-    background:#6b7280;
+    background:#ffffff;
+    opacity:0.6;
 }
 
 .marker75{
     position:absolute;
     left:75%;
     top:0;
-    width:2px;
+    width:3px;
     height:100%;
-    background:#374151;
+    background:#ffd700;
 }
 
 .marker100{
     position:absolute;
     right:0;
     top:0;
-    width:2px;
+    width:3px;
     height:100%;
-    background:#111827;
+    background:#ff4d4d;
 }
 
 .progress-fill{
@@ -472,12 +473,18 @@ ${challengeText}
         🥉 表彰台到達度
     </div>
 
-    <div class="progress">
-        <div
-            class="progress-fill"
-            style="width:${podiumPercent}%"
-        ></div>
-    </div>
+   <div class="progress">
+
+    <div class="marker50"></div>
+    <div class="marker75"></div>
+    <div class="marker100"></div>
+
+    <div
+        class="progress-fill"
+        style="width:${podiumPercent}%"
+    ></div>
+
+</div>
 </div>
 
 <div class="progress-box">
@@ -486,11 +493,17 @@ ${challengeText}
     </div>
 
     <div class="progress">
-        <div
-            class="progress-fill"
-            style="width:${winPercent}%"
-        ></div>
-    </div>
+
+    <div class="marker50"></div>
+    <div class="marker75"></div>
+    <div class="marker100"></div>
+
+    <div
+        class="progress-fill"
+        style="width:${winPercent}%"
+    ></div>
+
+</div>
 </div>
 `;
 
