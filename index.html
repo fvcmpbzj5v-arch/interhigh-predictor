@@ -156,11 +156,12 @@ hr{
 }
 
 .progress-fill{
-
     height:100%;
-
-    background:#2563eb;
-
+    background:linear-gradient(
+        90deg,
+        #22c55e,
+        #2563eb
+    );
 }
 
 </style>
@@ -327,6 +328,25 @@ Math.max(
         100 - ((time - nyushoLine) * 25)
     )
 );
+
+const podiumPercent =
+Math.max(
+    5,
+    Math.min(
+        100,
+        100 - ((time - podiumLine) * 25)
+    )
+);
+
+const winPercent =
+Math.max(
+    5,
+    Math.min(
+        100,
+        100 - ((time - winLine) * 25)
+    )
+);
+
 let challengeText = "";
 
 let challengeClass = "";
@@ -409,13 +429,39 @@ ${challengeText}
 
 <div class="progress-box">
     <div class="progress-label">
-        入賞ライン到達度
+        🎯 入賞ライン到達度
     </div>
 
     <div class="progress">
         <div
             class="progress-fill"
             style="width:${nyushoPercent}%"
+        ></div>
+    </div>
+</div>
+
+<div class="progress-box">
+    <div class="progress-label">
+        🥉 表彰台到達度
+    </div>
+
+    <div class="progress">
+        <div
+            class="progress-fill"
+            style="width:${podiumPercent}%"
+        ></div>
+    </div>
+</div>
+
+<div class="progress-box">
+    <div class="progress-label">
+        🥇 優勝到達度
+    </div>
+
+    <div class="progress">
+        <div
+            class="progress-fill"
+            style="width:${winPercent}%"
         ></div>
     </div>
 </div>
