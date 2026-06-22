@@ -267,6 +267,19 @@ document.getElementById("event").value;
 const eventData =
 data[event];
 
+const rangeMap = {
+  "男子100m": 1,
+  "男子200m": 2,
+  "男子400m": 4,
+  "男子800m": 8,
+  "男子1500m": 15,
+  "男子5000m": 60,
+  "男子110mH": 1.5,
+  "男子400mH": 4
+};
+
+const range = rangeMap[event] || 4;
+
 for(const yearData of eventData){
 
     let rank = yearData.places.length + 1;
@@ -352,7 +365,7 @@ Math.max(
     5,
     Math.min(
         100,
-        100 - ((time - nyushoLine) * 25)
+        100 - ((time - nyushoLine) / range * 100)
     )
 );
 
@@ -361,7 +374,7 @@ Math.max(
     5,
     Math.min(
         100,
-        100 - ((time - podiumLine) * 25)
+        100 - ((time - podiumLine) / range * 100)
     )
 );
 
@@ -370,7 +383,7 @@ Math.max(
     5,
     Math.min(
         100,
-        100 - ((time - winLine) * 25)
+        100 - ((time - winLine) / range * 100)
     )
 );
 
