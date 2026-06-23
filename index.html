@@ -22,17 +22,12 @@ content="LvvNd8LXFtBR3qL6jEb3htecJAoUnfridIor-G7hdtU" />
 
 <style>
     
-<meta name="google-site-verification" content="LvvNd8LXFtBR3qL6jEb3htecJAoUnfridIor-G7hdtU" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
     font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Hiragino Sans",
     "Yu Gothic",
+    "Hiragino Sans",
     sans-serif;
 
     max-width:700px;
@@ -44,11 +39,10 @@ body{
 h1{
     text-align:center;
     color:#1e3a8a;
-    font-weight:800;
-    letter-spacing:-0.03em;
-    font-size:clamp(24px,5vw,36px);
+    font-size:clamp(32px,5vw,56px);
+    font-weight:900;
+    letter-spacing:-0.05em;
     margin-bottom:20px;
-    line-height:1.2;
 }
 
 p{
@@ -225,11 +219,26 @@ hr{
 <body>
 
 <h1>高校陸上インターハイ順位予測</h1>
+
+.subtitle{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:20px;
+}
+
 <p class="subtitle">
 過去大会データから順位をシミュレーション
 </p>
 
-<p>( ✌︎'ω')✌︎　︎タイムを入力　✌︎('ω'✌︎ )</p>
+.guide{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+<p class="guide">
+( ✌︎'ω')✌︎ タイムを入力 ✌︎('ω'✌︎ )
+</p>
 
 <select id="event">
 
@@ -334,8 +343,22 @@ if(rank <= 5){
     nyushoCount++;
 }
 
+.year-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f8fafc;
+    border-radius:12px;
+    padding:12px 16px;
+    margin-bottom:8px;
+    border-left:4px solid #2563eb;
+}
+
 yearResults += `
-<p>${yearData.year}年 → ${rank}位相当</p>
+<div class="year-card">
+    <span>${yearData.year}年</span>
+    <strong>${rank}位相当</strong>
+</div>
 `;
 
 }
