@@ -302,6 +302,34 @@ function init() {
   // ここに今までの計算処理を書く
 }
 
+const placeholderMap = {
+
+    "男子100m":"例：10.58",
+
+    "男子200m":"例：21.35",
+
+    "男子400m":"例：48.92",
+
+    "男子800m":"例：1:54.32",
+
+    "男子1500m":"例：3:58.21",
+
+    "男子5000m":"例：14:38.52",
+
+    "男子110mH":"例：13.95",
+
+    "男子400mH":"例：50.12"
+
+};
+
+document.getElementById("event").addEventListener("change",function(){
+
+    document.getElementById("time").placeholder =
+
+    placeholderMap[this.value];
+
+});
+
 function parseTime(str){
 
     str = str.trim();
