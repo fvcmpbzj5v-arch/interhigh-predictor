@@ -324,78 +324,51 @@ document.getElementById("event").addEventListener("change",function(){
 
 });
 
-// ←この下に追加
 document.getElementById("time").addEventListener(
-
-    "input",
-
+    "blur",
     formatTimeInput
-
 );
-
-// ↓↓↓ここから追加↓↓↓
 
 function formatTimeInput(){
 
-    const event =
+    const input = document.getElementById("time");
+    const event = document.getElementById("event").value;
 
-    document.getElementById("event").value;
+    let value = input.value.replace(/\D/g,"");
 
+    if(value==="") return;
+
+    // 短距離
     if(
-
         event==="男子100m" ||
-
         event==="男子200m" ||
-
         event==="男子400m" ||
-
         event==="男子110mH" ||
-
         event==="男子400mH"
-
     ){
 
-        return;
+        if(value.length>=3){
 
-    }
+            const sec = value.slice(0,value.length-2);
+            const cs = value.slice(-2);
 
-    let value =
-
-    this.value.replace(/\D/g,"");
-
-    if(value.length<=2){
-
-        this.value=value;
+            input.value = sec + "." + cs;
+        }
 
         return;
-
     }
 
-    if(value.length<=4){
+    // 中長距離
 
-        this.value=
+    if(value.length>=5){
 
-        value.slice(0,value.length-2)
+        const min = value.slice(0,value.length-4);
+        const sec = value.slice(-4,-2);
+        const cs = value.slice(-2);
 
-        +"."+
-
-        value.slice(-2);
-
-        return;
-
+        input.value =
+        min + ":" + sec + "." + cs;
     }
-
-    this.value=
-
-    value.slice(0,value.length-4)
-
-    +":"
-
-    +value.slice(-4,-2)
-
-    +"."
-
-    +value.slice(-2);
 
 }
 
