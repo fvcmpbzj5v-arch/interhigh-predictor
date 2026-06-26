@@ -268,9 +268,12 @@ hr{
 
 <input
 id="time"
-type="number"
-step="0.01"
-placeholder="例：51.20">
+type="text"
+placeholder="例：51.20 または 4:12.34">
+
+<p style="font-size:14px;color:#666;text-align:center;">
+短距離：50.12　中長距離：4:12.34
+</p>
 
 <button onclick="predict()">
 順位予想
@@ -299,10 +302,30 @@ function init() {
   // ここに今までの計算処理を書く
 }
 
+function parseTime(str){
+
+    str = str.trim();
+
+    // 分:秒
+    if(str.includes(":")){
+
+        const parts = str.split(":");
+
+        const minutes = parseInt(parts[0]);
+
+        const seconds = parseFloat(parts[1]);
+
+        return minutes * 60 + seconds;
+    }
+
+    // 秒のみ
+    return parseFloat(str);
+}
+
 function predict(){
 
 const time =
-parseFloat(
+parseTime(
 document.getElementById("time").value
 );
 
