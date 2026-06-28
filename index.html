@@ -456,6 +456,7 @@ if(isNaN(time)){
 let totalRank = 0;
 let yearResults = "";
 
+let podiumCount = 0;
 let nyushoCount = 0;
 let finalCount = 0;
 
@@ -507,8 +508,12 @@ if(rank <= 8){
     finalCount++;
 }
 
-if(rank <= 5){
+if(rank <= 6){
     nyushoCount++;
+}
+
+if(rank <= 3){
+    podiumCount++;
 }
 
 yearResults += `
@@ -535,6 +540,11 @@ else if(avgRank <= 5){
 else if(avgRank <= 8){
     rankColor = "#2563eb";
 }
+
+const podiumRate =
+Math.round(
+(podiumCount / eventData.length) * 100
+);
 
 const nyushoRate =
 Math.round(
@@ -664,21 +674,20 @@ ${yearResults}
 </div>
 
 <div class="stat-card">
-    <div class="stat-title">🔥 入賞率（6位以内）</div>
-    <div class="stat-value">${nyushoRate}%</div>
+    <div class="stat-title">🥉 表彰台率（3位以内）</div>
+    <div class="stat-value">${podiumRate}%</div>
 </div>
 
 <div class="stat-card">
-    <div class="stat-title">🥉 表彰台率（3位以内）</div>
-    <div class="stat-value">
-        ${formatTime(podiumLine)}
-    </div>
+    <div class="stat-title">🔥 入賞率（6位以内）</div>
+    <div class="stat-value">${nyushoRate}%</div>
 </div>
 
 <div class="stat-card">
     <div class="stat-title">🎯 決勝進出率（8位以内）</div>
     <div class="stat-value">${finalRate}%</div>
 </div>
+
 
 <p>${message}</p>
 <p class="${challengeClass}">
