@@ -408,6 +408,19 @@ function formatTimeInput(){
 
 }
 
+function formatTime(sec){
+
+    if(sec >= 60){
+
+        const min = Math.floor(sec / 60);
+        const s = (sec % 60).toFixed(2).padStart(5,"0");
+
+        return `${min}:${s}`;
+    }
+
+    return sec.toFixed(2);
+}
+
 function parseTime(str){
 
     str = str.trim();
@@ -651,12 +664,19 @@ ${yearResults}
 </div>
 
 <div class="stat-card">
-    <div class="stat-title">🔥 入賞率</div>
+    <div class="stat-title">🔥 入賞率（6位以内）</div>
     <div class="stat-value">${nyushoRate}%</div>
 </div>
 
 <div class="stat-card">
-    <div class="stat-title">🎯 決勝進出率</div>
+    <div class="stat-title">🥉 表彰台率（3位以内）</div>
+    <div class="stat-value">
+        ${formatTime(podiumLine)}
+    </div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">🎯 決勝進出率（8位以内）</div>
     <div class="stat-value">${finalRate}%</div>
 </div>
 
@@ -669,7 +689,7 @@ ${challengeText}
 
 <div class="progress-box">
     <div class="progress-label">
-    🎯 入賞ライン到達度 ${Math.round(nyushoPercent)}%
+    🔥 入賞ライン到達度 ${Math.round(nyushoPercent)}%
 </div>
 
  <div class="progress">
