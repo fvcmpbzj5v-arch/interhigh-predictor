@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://fvcmpbzj5v-arch.github.io/interhigh-predictor/sitemap.xml
