@@ -228,11 +228,16 @@ hr{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:#f8fafc;
+
+    background:#eef4ff;
+    border:1px solid #c7d7fe;
+    border-left:4px solid #2563eb;
+
     border-radius:12px;
     padding:12px 16px;
     margin-bottom:8px;
-    border-left:4px solid #2563eb;
+
+    box-shadow:0 2px 6px rgba(37,99,235,0.08);
 }
 
 .home-button{
@@ -653,16 +658,19 @@ Math.round(
 (finalCount / eventData.length) * 100
 );
 
-let message="";
+letlet message="";
 
 if(avgRank <= 3){
     message="表彰台クラス";
 }
-else if(avgRank <= 5){
+else if(avgRank <= 6){
     message="入賞クラス";
 }
-else{
+else if(avgRank <= 8){
     message="決勝進出クラス";
+}
+else{
+    message="予選クラス";
 }
 
 const winLine = eventData[0].places[0];
