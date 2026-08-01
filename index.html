@@ -289,6 +289,16 @@ footer p{
 ( ✌︎'ω')✌︎ タイムを入力 ✌︎('ω'✌︎ )
 </p>
 
+<div class="predict-card">
+
+<h2 class="predict-card-title">
+タイムを入力して順位を予測
+</h2>
+
+<label for="event" class="form-label">
+種目を選択
+</label>
+
 <select id="event">
 
 <optgroup label="男子">
@@ -318,12 +328,16 @@ footer p{
 
 </select>
 
+<label for="time" class="form-label">
+タイムを入力
+</label>
+
 <input
 id="time"
 type="text"
 placeholder="例：51.20 または 4:12.34">
 
-<p style="font-size:14px;color:#666;text-align:center;line-height:1.6;">
+<p class="input-help">
 数字だけで入力できます<br>
 100m：1058 → 10.58<br>
 800m：15234 → 1:52.34
@@ -337,6 +351,7 @@ placeholder="例：51.20 または 4:12.34">
 タイムを入力してください
 </div>
 
+</div>
 <script>
 
 let data = null;
