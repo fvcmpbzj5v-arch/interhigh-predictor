@@ -585,11 +585,18 @@ document.getElementById("event").value;
 const eventData =
 data[event];
 
-const displayData = eventData;
+if (!Array.isArray(eventData) || eventData.length === 0) {
+    document.getElementById("result").innerHTML =
+        "この種目の予測データがありません";
+    return;
+}
 
-const analysisData = eventData
-    .filter(yearData => yearData.year >= 2022)
+// 年度の新しい順に並べる
+const displayData = [...eventData]
     .sort((a, b) => b.year - a.year);
+
+// 最新5年分だけを使用
+const analysisData = displayData.slice(0, 5);
 
 const rangeMap = {
   "男子100m": 1,
@@ -616,70 +623,63 @@ const rangeMap = {
 
 const range = rangeMap[event] || 4;
 
-for(const yearData of displayData){
 
-    let rank = yearData.places.length + 1;
+function getRank(time, places) {
+    let rank = places.length + 1;
 
-    for(let i=0;i<yearData.places.length;i++){
-        if(time <= yearData.places[i]){
+    for (let i = 0; i < places.length; i++) {
+        if (time <= places[i]) {
             rank = i + 1;
             break;
         }
     }
 
+    return rank;
+}
+
+// 成績カード：最新5年分
+for (const yearData of analysisData) {
+
+    const rank = getRank(time, yearData.places);
+
+    yearResults += `
+    <div class="year-card">
+        <span>${yearData.year}年</span>
+        <strong>${rank}位相当</strong>
+    </div>
+    `;
+}
+
+// 総合評価：最新5年分
+for (const yearData of analysisData) {
+
+    const rank = getRank(time, yearData.places);
+
     totalRank += rank;
 
-if(rank <= 8){
-    finalCount++;
-}
-
-if(rank <= 6){
-    nyushoCount++;
-}
-
-if(rank <= 3){
-    podiumCount++;
-}
-
-yearResults += `
-<div class="year-card">
-    <span>${yearData.year}年</span>
-    <strong>${rank}位相当</strong>
-</div>
-`;
-
+    if (rank <= 8) finalCount++;
+    if (rank <= 6) nyushoCount++;
+    if (rank <= 3) podiumCount++;
 }
 
 const avgRank =
-(totalRank / eventData.length)
-.toFixed(1);
-
-let rankColor = "#ef4444";
-
-if(avgRank <= 3){
-    rankColor = "#f59e0b";
-}
-else if(avgRank <= 5){
-    rankColor = "#22c55e";
-}
-else if(avgRank <= 8){
-    rankColor = "#2563eb";
-}
+    (totalRank / analysisData.length).toFixed(1);
 
 const podiumRate =
-Math.round(
-(podiumCount / eventData.length) * 100
-);
+    Math.round(
+        podiumCount / analysisData.length * 100
+    );
 
 const nyushoRate =
-Math.round(
-(nyushoCount / eventData.length) * 100
-);
+    Math.round(
+        nyushoCount / analysisData.length * 100
+    );
 
 const finalRate =
-Math.round(
-(finalCount / eventData.length) * 100
-);
+    Math.round(
+        finalCount / analysisData.length * 100
+    );
+
 
 let message="";
 
@@ -700,7 +700,7 @@ const latestData = analysisData[0];
 
 const winLine = latestData.places[0];
 const podiumLine = latestData.places[2];
-const nyushoLine = latestData.places[4];
+const nyushoLine = latestData.places[5];
 
 
 const podiumDiff =
