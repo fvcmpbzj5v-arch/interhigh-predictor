@@ -585,6 +585,12 @@ document.getElementById("event").value;
 const eventData =
 data[event];
 
+const displayData = eventData;
+
+const analysisData = eventData
+    .filter(yearData => yearData.year >= 2022)
+    .sort((a, b) => b.year - a.year);
+
 const rangeMap = {
   "男子100m": 1,
   "男子200m": 2,
@@ -610,7 +616,7 @@ const rangeMap = {
 
 const range = rangeMap[event] || 4;
 
-for(const yearData of eventData){
+for(const yearData of displayData){
 
     let rank = yearData.places.length + 1;
 
@@ -690,9 +696,11 @@ else{
     message="予選クラス";
 }
 
-const winLine = eventData[0].places[0];
-const podiumLine = eventData[0].places[2];
-const nyushoLine = eventData[0].places[4];
+const latestData = analysisData[0];
+
+const winLine = latestData.places[0];
+const podiumLine = latestData.places[2];
+const nyushoLine = latestData.places[4];
 
 
 const podiumDiff =
