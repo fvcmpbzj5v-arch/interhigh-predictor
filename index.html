@@ -664,6 +664,19 @@ for (const yearData of analysisData) {
 
 const avgRank =
     (totalRank / analysisData.length).toFixed(1);
+// 総合評価の色
+let rankColor = "#ef4444";
+
+if (avgRank <= 3) {
+    rankColor = "#f59e0b";
+}
+else if (avgRank <= 5) {
+    rankColor = "#22c55e";
+}
+else if (avgRank <= 8) {
+    rankColor = "#2563eb";
+}
+
 
 const podiumRate =
     Math.round(
